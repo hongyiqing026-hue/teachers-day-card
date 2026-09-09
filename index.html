@@ -25,7 +25,7 @@
     .envelope.open .env-flap { transform: rotateX(168deg); }
     .wax-seal { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #c0392b, #8b1a1a 70%); z-index: 10; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     .wax-seal::before { content: "師"; color: rgba(255,230,180,0.9); font-size: 22px; }
-    .wax-seal.broken { transform: translateX(-50%) scale(1.15) rotate(12deg); opacity: 0; }
+    .wax-seal.broken { transform: translateX(-50%) scale(1.15) rotate(12deg); opacity: 0; pointer-events: none; }
     #letter-stage { background: linear-gradient(180deg, #f5efe4 0%, #ebe2d2 100%); z-index: 30; overflow-y: auto; }
     .letter-container { width: 100%; max-width: 420px; padding: 24px 18px 80px; margin: 0 auto; opacity: 0; transform: translateY(40px); transition: all 1s; }
     .letter-container.show { opacity: 1; transform: translateY(0); }
@@ -44,6 +44,7 @@
     .bless-content.show { opacity: 1; transform: scale(1); }
     .bless-title { font-size: 32px; color: var(--accent); margin: 20px 0; }
     .bless-text { font-size: 15px; line-height: 1.8; color: #6a5a4a; margin: 40px 0; }
+    @keyframes sealCrack { 0% { transform: translateX(-50%) scale(1) rotate(0); } 100% { transform: translateX(-50%) scale(1.4) rotate(18deg); opacity: 0; } }
   </style>
 </head>
 <body>
@@ -79,53 +80,77 @@
   </section>
 
   <section id="bless-stage" class="stage hidden">
-    <div class="bless-content">
+    <div class="bless-content" id="blessContent">
       <div class="bless-title">教师节快乐</div>
-      <div class="bless-text">愿您桃李满天下 春晖遍四方</div>
+      <div class="bless-text">愿您桃李满天下<br>春晖遍四方</div>
     </div>
   </section>
 
   <script>
     const $ = sel => document.querySelector(sel);
-    const stages = { cover: $('#cover'), envelope: $('#envelope-stage'), letter: $('#letter-stage'), bless: $('#bless-stage') };
+    const stages = {
+      cover: $('#cover'),
+      envelope: $('#envelope-stage'),
+      letter: $('#letter-stage'),
+      bless: $('#bless-stage')
+    };
+
     function showStage(name) {
       Object.values(stages).forEach(s => s.classList.add('hidden'));
       stages[name].classList.remove('hidden');
     }
+
     const defaultLetter = '老师您好：\n\n时光匆匆，转眼又是一年教师节。\n\n还记得课堂上您耐心讲解的样子。\n\n谢谢您教会了我知识，更教会了我如何认真对待生活。\n\n愿您身体安康，教师节快乐！';
+
     function init() {
       const now = new Date();
       $('#letterDate').textContent = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
-      $('#letterBody').innerText = defaultLetter;
+      
+      const saved = localStorage.getItem('letter');
+      $('#letterBody').innerText = saved || defaultLetter;
+
       $('#letterBody').addEventListener('input', function() {
         localStorage.setItem('letter', this.innerText);
       });
-      const saved = localStorage.getItem('letter');
-      if (saved) $('#letterBody').innerText = saved;
+
       $('#startBtn').addEventListener('click', () => showStage('envelope'));
+
       const openEnvelope = () => {
         const seal = $('#waxSeal');
         const env = $('#envelope');
         if (seal.classList.contains('broken')) return;
+        
         seal.classList.add('broken');
         seal.style.animation = 'sealCrack 0.55s ease forwards';
-        setTimeout(() => env.classList.add('open'), 280);
+        
+        setTimeout(() => {
+          env.classList.add('open');
+        }, 280);
+        
         setTimeout(() => {
           showStage('letter');
           $('#letterContainer').classList.add('show');
           $('#bottomBar').classList.add('show');
         }, 1100);
       };
+
       $('#envelopeWrap').addEventListener('click', openEnvelope);
-      $('#waxSeal').addEventListener('click', e => { e.stopPropagation(); openEnvelope(); });
+      $('#waxSeal').addEventListener('click', e => {
+        e.stopPropagation();
+        openEnvelope();
+      });
+
       $('#finishBtn').addEventListener('click', () => {
         showStage('bless');
         $('#blessContent').classList.add('show');
       });
     }
-    document.addEventListener('DOMContentLoaded', init);
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes sealCrack { 0% { transform: translateX(-50%) scale(1) rotate(0); } 100% { transform: translateX(-50%) scale(1.4) rotate(18deg); opacity: 0; } }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
