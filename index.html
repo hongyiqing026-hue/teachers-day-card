@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>给老师的一封信</title>
+  <title>致亲爱的刘老师</title>
 
   <style>
 
@@ -20,11 +20,6 @@
       height: 100vh;
       overflow: hidden;
     }
-
-
-    /* =====================================
-       页面
-    ===================================== */
 
     .page {
       width: 100%;
@@ -42,9 +37,9 @@
     }
 
 
-    /* =====================================
+    /* =========================
        第一页
-    ===================================== */
+    ========================= */
 
     #p1 {
       background:
@@ -53,6 +48,7 @@
           #f8f1e3,
           #e8d9c4
         );
+
       text-align: center;
       padding: 20px;
     }
@@ -71,10 +67,13 @@
 
     #p1 button {
       padding: 15px 40px;
+
       background: #8b5a2b;
       color: white;
+
       border: none;
       border-radius: 30px;
+
       font-size: 18px;
       cursor: pointer;
 
@@ -91,12 +90,13 @@
     }
 
 
-    /* =====================================
+    /* =========================
        音乐按钮
-    ===================================== */
+    ========================= */
 
     #musicBtn {
       position: fixed;
+
       top: 18px;
       right: 18px;
 
@@ -104,11 +104,14 @@
 
       padding: 8px 14px;
 
-      border: 1px solid rgba(139,90,43,.25);
+      border:
+        1px solid
+        rgba(139,90,43,.25);
 
       border-radius: 20px;
 
-      background: rgba(255,250,240,.78);
+      background:
+        rgba(255,250,240,.78);
 
       color: #8b5a2b;
 
@@ -126,12 +129,13 @@
     }
 
 
-    /* =====================================
+    /* =========================
        花瓣
-    ===================================== */
+    ========================= */
 
     #petals {
       position: fixed;
+
       inset: 0;
 
       width: 100%;
@@ -152,7 +156,8 @@
       width: 12px;
       height: 8px;
 
-      background: rgba(214,132,126,.45);
+      background:
+        rgba(214,132,126,.45);
 
       border-radius:
         100% 0 100% 0;
@@ -163,7 +168,6 @@
 
       opacity: .6;
     }
-
 
     @keyframes petalFall {
 
@@ -184,8 +188,8 @@
         top: 110vh;
         opacity: 0;
       }
-    }
 
+    }
 
     @keyframes petalSway {
 
@@ -208,12 +212,13 @@
       100% {
         margin-left: 0;
       }
+
     }
 
 
-    /* =====================================
+    /* =========================
        第二页：信封
-    ===================================== */
+    ========================= */
 
     #p2 {
       background:
@@ -224,9 +229,7 @@
         );
     }
 
-
     .envelope-area {
-
       width: 340px;
       height: 300px;
 
@@ -238,9 +241,7 @@
       justify-content: center;
     }
 
-
     .box {
-
       width: 300px;
       height: 200px;
 
@@ -254,7 +255,7 @@
 
       box-shadow:
         0 10px 30px
-        rgba(0,0,0,.2);
+        rgba(0,0,0,0.2);
 
       display: flex;
 
@@ -269,12 +270,11 @@
     }
 
 
-    /* =====================================
-       信纸
-    ===================================== */
+    /* =========================
+       信封里的信纸
+    ========================= */
 
     .hidden-letter {
-
       position: absolute;
 
       width: 260px;
@@ -291,10 +291,6 @@
         0 8px 25px
         rgba(80,50,20,.16);
 
-      z-index: 1;
-
-      padding: 25px 20px;
-
       opacity: 0;
 
       transform:
@@ -302,41 +298,20 @@
         scale(.94);
 
       transition:
-        transform 1s cubic-bezier(.2,.8,.2,1),
+        transform 1s
+        cubic-bezier(.2,.8,.2,1),
+
         opacity .35s ease;
 
       pointer-events: none;
     }
 
 
-    .hidden-letter h3 {
-
-      text-align: center;
-
-      color: #8b5a2b;
-
-      font-size: 18px;
-
-      margin-bottom: 18px;
-    }
-
-
-    .hidden-letter p {
-
-      color: #6f6254;
-
-      font-size: 13px;
-
-      line-height: 1.9;
-    }
-
-
-    /* =====================================
-       信封盖
-    ===================================== */
+    /* =========================
+       信封盖子
+    ========================= */
 
     .envelope-flap {
-
       position: absolute;
 
       left: 0;
@@ -354,7 +329,8 @@
           50% 100%
         );
 
-      transform-origin: top center;
+      transform-origin:
+        top center;
 
       z-index: 5;
 
@@ -364,12 +340,11 @@
     }
 
 
-    /* =====================================
+    /* =========================
        信封文字
-    ===================================== */
+    ========================= */
 
     .envelope-text {
-
       position: absolute;
 
       left: 50%;
@@ -378,15 +353,17 @@
       transform:
         translateX(-50%);
 
-      width: 85%;
+      width: 90%;
 
       text-align: center;
 
       color: #8b5a2b;
 
-      font-size: 16px;
+      font-size: 15px;
 
       line-height: 1.6;
+
+      white-space: nowrap;
 
       z-index: 4;
 
@@ -395,12 +372,11 @@
     }
 
 
-    /* =====================================
+    /* =========================
        印章
-    ===================================== */
+    ========================= */
 
     .seal {
-
       width: 70px;
       height: 70px;
 
@@ -416,7 +392,6 @@
       color: #ffe6b4;
 
       font-size: 32px;
-
       font-weight: bold;
 
       cursor: pointer;
@@ -432,14 +407,16 @@
         opacity .35s ease;
     }
 
-
     .seal:active {
       transform: scale(.95);
     }
 
 
-    .msg {
+    /* =========================
+       提示文字
+    ========================= */
 
+    .msg {
       position: absolute;
 
       bottom: -50px;
@@ -453,34 +430,27 @@
     }
 
 
-    /* =====================================
-       信封打开状态
-    ===================================== */
+    /* =========================
+       信封打开动画
+    ========================= */
 
     .box.open .envelope-flap {
-
       transform:
         rotateX(180deg);
     }
 
-
     .box.open .seal {
-
       opacity: 0;
 
       transform:
         scale(.65);
     }
 
-
     .box.open .envelope-text {
-
       opacity: 0;
     }
 
-
     .box.open .hidden-letter {
-
       opacity: 1;
 
       transform:
@@ -490,19 +460,16 @@
       z-index: 20;
     }
 
-
     .box.open .msg {
-
       opacity: 0;
     }
 
 
-    /* =====================================
-       第三页
-    ===================================== */
+    /* =========================
+       第三页：信纸
+    ========================= */
 
     #p3 {
-
       background:
         linear-gradient(
           180deg,
@@ -516,24 +483,22 @@
 
       opacity: 0;
 
-      transform: translateY(20px);
+      transform:
+        translateY(20px);
 
       transition:
         opacity .6s ease,
         transform .6s ease;
     }
 
-
     #p3.active {
-
       opacity: 1;
 
-      transform: translateY(0);
+      transform:
+        translateY(0);
     }
 
-
     .letter {
-
       width: 100%;
 
       max-width: 420px;
@@ -553,11 +518,9 @@
         cubic-bezier(.2,.8,.2,1);
     }
 
-
     @keyframes letterAppear {
 
       from {
-
         opacity: 0;
 
         transform:
@@ -566,18 +529,16 @@
       }
 
       to {
-
         opacity: 1;
 
         transform:
           translateY(0)
           scale(1);
       }
+
     }
 
-
     .letter h2 {
-
       text-align: center;
 
       color: #8b5a2b;
@@ -585,9 +546,7 @@
       margin-bottom: 20px;
     }
 
-
     .letter textarea {
-
       width: 100%;
 
       height: 300px;
@@ -604,7 +563,8 @@
 
       resize: none;
 
-      font-family: Arial,
+      font-family:
+        Arial,
         "Microsoft YaHei",
         sans-serif;
 
@@ -613,18 +573,16 @@
       color: #5e5145;
 
       outline: none;
+
+      line-height: 1.8;
     }
 
-
     .letter textarea:focus {
-
       border-color:
         #c9a989;
     }
 
-
     .letter .date {
-
       text-align: right;
 
       font-size: 12px;
@@ -634,9 +592,7 @@
       margin: 10px 0;
     }
 
-
     .letter button {
-
       width: 100%;
 
       padding: 12px;
@@ -657,12 +613,11 @@
     }
 
 
-    /* =====================================
+    /* =========================
        第四页
-    ===================================== */
+    ========================= */
 
     #p4 {
-
       background:
         linear-gradient(
           160deg,
@@ -675,9 +630,7 @@
       padding: 20px;
     }
 
-
     #p4 h1 {
-
       font-size: 44px;
 
       color: #8b5a2b;
@@ -688,24 +641,7 @@
         finalAppear .9s ease;
     }
 
-
-    #p4 p {
-
-      font-size: 16px;
-
-      line-height: 2;
-
-      color: #6a5a4a;
-
-      margin-bottom: 40px;
-
-      animation:
-        finalAppear 1.1s ease;
-    }
-
-
     .seal2 {
-
       width: 90px;
       height: 90px;
 
@@ -735,11 +671,9 @@
         cubic-bezier(.2,.8,.2,1);
     }
 
-
     @keyframes finalAppear {
 
       from {
-
         opacity: 0;
 
         transform:
@@ -747,19 +681,17 @@
       }
 
       to {
-
         opacity: 1;
 
         transform:
           translateY(0);
       }
-    }
 
+    }
 
     @keyframes sealAppear {
 
       from {
-
         opacity: 0;
 
         transform:
@@ -768,24 +700,23 @@
       }
 
       to {
-
         opacity: 1;
 
         transform:
           scale(1)
           rotate(0);
       }
+
     }
 
 
-    /* =====================================
+    /* =========================
        手机适配
-    ===================================== */
+    ========================= */
 
     @media (max-width: 600px) {
 
       #p1 h1 {
-
         font-size: 30px;
 
         line-height: 1.5;
@@ -793,58 +724,43 @@
         margin-bottom: 15px;
       }
 
-
       #p1 p {
-
         font-size: 16px;
 
         margin-bottom: 30px;
       }
 
-
       #p1 button {
-
         padding:
           13px 34px;
 
         font-size: 16px;
       }
 
-
       .envelope-area {
-
         transform:
           scale(.9);
       }
 
-
       .letter {
-
         max-width: 390px;
 
         padding:
           35px 18px;
       }
 
-
       .letter textarea {
-
         height: 280px;
 
         font-size: 14px;
       }
 
-
       #p4 h1 {
-
         font-size: 38px;
       }
 
-
       #musicBtn {
-
         top: 12px;
-
         right: 12px;
 
         font-size: 11px;
@@ -856,15 +772,16 @@
     @media (max-width: 380px) {
 
       .envelope-area {
-
         transform:
           scale(.82);
       }
 
-
       #p1 h1 {
-
         font-size: 27px;
+      }
+
+      .envelope-text {
+        font-size: 13px;
       }
 
     }
@@ -876,31 +793,30 @@
 <body>
 
 
-<!-- =====================================
+<!-- =========================
      花瓣
-===================================== -->
+========================= -->
 
 <div id="petals"></div>
 
 
-<!-- =====================================
+<!-- =========================
      音乐按钮
-===================================== -->
+========================= -->
 
 <button id="musicBtn">
   ♫ 音乐：关闭
 </button>
 
 
-
-<!-- =====================================
+<!-- =========================
      第一页
-===================================== -->
+========================= -->
 
 <div id="p1" class="page active">
 
   <h1>
-    给最好的郑老师的一封信
+    致亲爱的刘老师
   </h1>
 
   <p>
@@ -914,10 +830,9 @@
 </div>
 
 
-
-<!-- =====================================
-     第二页
-===================================== -->
+<!-- =========================
+     第二页：信封
+========================= -->
 
 <div id="p2" class="page">
 
@@ -926,50 +841,40 @@
     <div class="box" id="envelopeBox">
 
 
-      <!-- 信纸 -->
+      <!-- 信封里面的信纸 -->
 
       <div class="hidden-letter">
-
-        <h3>
-          写给老师
-        </h3>
-
-        <p>
-          老师，教师节快乐呀!!
-        </p>
-
-        <p>
-          愿您身体安康，平安幸福。
-        </p>
-
       </div>
 
 
-      <!-- 信封 -->
+      <!-- 信封文字 -->
 
       <div class="envelope-text">
-
-        教师节快乐！
-
+        教師の日おめでとうございます！ 🌸
       </div>
 
 
-      <div class="seal"
-           onclick="openEnvelope()">
+      <!-- 印章 -->
+
+      <div
+        class="seal"
+        onclick="openEnvelope()">
 
         師
 
       </div>
 
 
+      <!-- 信封盖 -->
+
       <div class="envelope-flap">
       </div>
 
 
+      <!-- 提示文字 -->
+
       <div class="msg">
-
         点击印章打开
-
       </div>
 
     </div>
@@ -979,24 +884,22 @@
 </div>
 
 
-
-<!-- =====================================
-     第三页
-===================================== -->
+<!-- =========================
+     第三页：信纸
+========================= -->
 
 <div id="p3" class="page">
 
   <div class="letter">
 
     <h2>
-      敬爱的老师
+      亲爱的刘老师
     </h2>
 
 
     <textarea
       id="txt"
-      placeholder="写下你的祝福...">
-    </textarea>
+      placeholder="写下你的祝福..."></textarea>
 
 
     <div
@@ -1014,21 +917,15 @@
 </div>
 
 
-
-<!-- =====================================
+<!-- =========================
      第四页
-===================================== -->
+========================= -->
 
 <div id="p4" class="page">
 
   <h1>
     教师节快乐
   </h1>
-
-  <p>
-    愿您桃李满天下<br>
-    家庭事业顶呱呱
-  </p>
 
   <div class="seal2">
     師
@@ -1037,25 +934,20 @@
 </div>
 
 
-
 <script>
 
+
 /* =====================================
-   你的信件内容
+   信件正文
 ===================================== */
 
-const txt = `老师您好：
+const txt = `亲爱的刘老师
 
-老师，教师节快乐呀!!
+老师好，教师节快乐啊
 
-上学期见不到您我们真的很想念您，还好大四又能上您的课了，我会好好听讲的😊
+感谢您一直以来的教导，虽然我听的不咋认真，但我真切被您的责任心与真诚感染，所以笔译课我会好好听讲的（我尽力）
 
-您无疑是我最喜欢的老师，当然我们许多人都会这么想的嘻嘻嘻
-
-您以后有什么任务可以尽情吩咐我，我很开心能帮助到您❤️
-
-愿您身体安康，平安幸福，教师节快乐！`;
-
+祝您身体健康，万事如意，教师节快乐！`;
 
 
 /* =====================================
@@ -1077,12 +969,13 @@ function show(n) {
     .classList.add('active');
 
 
-  /* 第三页 */
+  /* 第三页显示时 */
 
   if (n === 3) {
 
     const d =
       new Date();
+
 
     document
       .getElementById('d')
@@ -1095,18 +988,18 @@ function show(n) {
         + '日';
 
 
-    const s =
+    const saved =
       localStorage.getItem('l');
 
 
     document
       .getElementById('txt')
       .value =
-        s || txt;
+        saved || txt;
+
   }
 
 }
-
 
 
 /* =====================================
@@ -1115,18 +1008,11 @@ function show(n) {
 
 function startExperience() {
 
-  /*
-     音乐必须由用户点击触发，
-     手机浏览器才允许播放
-  */
-
   startMusic();
-
 
   show(2);
 
 }
-
 
 
 /* =====================================
@@ -1141,11 +1027,7 @@ function openEnvelope() {
     );
 
 
-  /*
-     防止重复点击
-  */
-
-  if(
+  if (
     box.classList.contains('open')
   ) {
 
@@ -1154,13 +1036,12 @@ function openEnvelope() {
   }
 
 
+  /* 信封打开 */
+
   box.classList.add('open');
 
 
-  /*
-     信封打开后，
-     停留一点时间再进入信纸页面
-  */
+  /* 等待动画结束 */
 
   setTimeout(
     function() {
@@ -1172,7 +1053,6 @@ function openEnvelope() {
   );
 
 }
-
 
 
 /* =====================================
@@ -1194,7 +1074,6 @@ document
   );
 
 
-
 /* =====================================
    创建花瓣
 ===================================== */
@@ -1208,7 +1087,7 @@ const petalBox =
 const petalCount = 22;
 
 
-for(
+for (
   let i = 0;
   i < petalCount;
   i++
@@ -1224,17 +1103,13 @@ for(
     'petal';
 
 
-  /*
-     随机水平位置
-  */
+  /* 随机位置 */
 
   petal.style.left =
     Math.random() * 100 + '%';
 
 
-  /*
-     随机大小
-  */
+  /* 随机大小 */
 
   const scale =
     .6 +
@@ -1242,17 +1117,17 @@ for(
 
 
   petal.style.transform =
-    `rotate(${Math.random()*360}deg) scale(${scale})`;
+    `rotate(${Math.random() * 360}deg) scale(${scale})`;
 
 
-  /*
-     随机飘落速度
-  */
+  /* 随机下落速度 */
 
   const fall =
     8 +
     Math.random() * 9;
 
+
+  /* 随机摆动 */
 
   const sway =
     3 +
@@ -1263,13 +1138,10 @@ for(
     `${fall}s, ${sway}s`;
 
 
-  /*
-     让花瓣一开始
-     就处在不同位置
-  */
+  /* 随机开始时间 */
 
   petal.style.animationDelay =
-    `${-Math.random()*12}s, ${-Math.random()*4}s`;
+    `${-Math.random() * 12}s, ${-Math.random() * 4}s`;
 
 
   petalBox.appendChild(
@@ -1279,27 +1151,27 @@ for(
 }
 
 
-
 /* =====================================
-   舒缓原创音乐
+   原创舒缓音乐
 ===================================== */
 
 let audioContext =
   null;
 
+
 let musicPlaying =
   false;
 
+
 let musicTimer =
   null;
+
 
 let musicStep =
   0;
 
 
-/*
-   柔和的 C 大调旋律
-*/
+/* 音符 */
 
 const melody = [
 
@@ -1336,9 +1208,8 @@ const melody = [
 ];
 
 
-
 /* =====================================
-   播放一个音
+   播放音符
 ===================================== */
 
 function playNote(
@@ -1346,7 +1217,7 @@ function playNote(
   duration
 ) {
 
-  if(!audioContext) {
+  if (!audioContext) {
 
     return;
 
@@ -1367,11 +1238,6 @@ function playNote(
       .createGain();
 
 
-  /*
-     正弦波：
-     声音比较柔和
-  */
-
   oscillator.type =
     'sine';
 
@@ -1383,10 +1249,6 @@ function playNote(
       now
     );
 
-
-  /*
-     淡入
-  */
 
   gain.gain
     .setValueAtTime(
@@ -1401,10 +1263,6 @@ function playNote(
       now + .08
     );
 
-
-  /*
-     淡出
-  */
 
   gain.gain
     .exponentialRampToValueAtTime(
@@ -1435,14 +1293,13 @@ function playNote(
 }
 
 
-
 /* =====================================
    播放旋律
 ===================================== */
 
 function playMelody() {
 
-  if(!musicPlaying) {
+  if (!musicPlaying) {
 
     return;
 
@@ -1476,14 +1333,13 @@ function playMelody() {
 }
 
 
-
 /* =====================================
    开始音乐
 ===================================== */
 
 function startMusic() {
 
-  if(!audioContext) {
+  if (!audioContext) {
 
     audioContext =
       new (
@@ -1494,7 +1350,7 @@ function startMusic() {
   }
 
 
-  if(
+  if (
     audioContext.state ===
     'suspended'
   ) {
@@ -1504,11 +1360,7 @@ function startMusic() {
   }
 
 
-  /*
-     防止重复播放
-  */
-
-  if(musicPlaying) {
+  if (musicPlaying) {
 
     return;
 
@@ -1539,7 +1391,6 @@ function startMusic() {
 }
 
 
-
 /* =====================================
    关闭音乐
 ===================================== */
@@ -1563,7 +1414,6 @@ function stopMusic() {
 }
 
 
-
 /* =====================================
    音乐按钮
 ===================================== */
@@ -1574,7 +1424,7 @@ document
     'click',
     function() {
 
-      if(musicPlaying) {
+      if (musicPlaying) {
 
         stopMusic();
 
@@ -1586,6 +1436,7 @@ document
 
     }
   );
+
 
 </script>
 
