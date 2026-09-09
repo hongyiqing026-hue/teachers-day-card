@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta property="og:title" content="给老师的一封信 · 教师节" />
+  <meta property="og:description" content="用心写一封信，送给敬爱的老师。教师节快乐！" />
+  <title>给老师的一封信 · 教师节</title>
+  <style>
+    :root { --bg: #f5f0e6; --paper: #faf6ef; --ink: #4a3f35; --accent: #8b5a2b; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; font-family: "PingFang SC", serif; background: var(--bg); color: var(--ink); }
+    .stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; transition: opacity 0.8s ease; }
+    .stage.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #cover { background: linear-gradient(165deg, #f8f1e3 0%, #d9cbb8 100%); z-index: 50; }
+    .cover-content { text-align: center; padding: 0 28px; }
+    .cover-title { font-size: 28px; font-weight: 500; color: var(--accent); margin-bottom: 12px; }
+    .cover-btn { display: inline-block; padding: 14px 42px; border: 1.5px solid var(--accent); border-radius: 40px; color: var(--accent); background: rgba(255,255,255,0.35); cursor: pointer; }
+    #envelope-stage { background: radial-gradient(ellipse at center, #f7f0e4 0%, #d4c4a8 100%); z-index: 40; }
+    .envelope-wrap { position: relative; width: 280px; height: 190px; perspective: 900px; cursor: pointer; }
+    .envelope { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
+    .envelope.open { transform: translateY(-30px) rotateX(-18deg); }
+    .env-body { position: absolute; inset: 0; background: linear-gradient(145deg, #f0e6d4, #e2d4bc); border-radius: 4px 4px 8px 8px; box-shadow: 0 12px 28px rgba(90,60,30,0.18); }
+    .env-flap { position: absolute; top: 0; width: 100%; height: 95px; background: linear-gradient(180deg, #e8dcc8, #d9cbb0); clip-path: polygon(0 0, 50% 78%, 100% 0); transform-origin: top center; transition: transform 0.85s; z-index: 5; }
+    .envelope.open .env-flap { transform: rotateX(168deg); }
+    .wax-seal { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #c0392b, #8b1a1a 70%); z-index: 10; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .wax-seal::before { content: "師"; color: rgba(255,230,180,0.9); font-size: 22px; }
+    .wax-seal.broken { transform: translateX(-50%) scale(1.15) rotate(12deg); opacity: 0; }
+    #letter-stage { background: linear-gradient(180deg, #f5efe4 0%, #ebe2d2 100%); z-index: 30; overflow-y: auto; }
+    .letter-container { width: 100%; max-width: 420px; padding: 24px 18px 80px; margin: 0 auto; opacity: 0; transform: translateY(40px); transition: all 1s; }
+    .letter-container.show { opacity: 1; transform: translateY(0); }
+    .letter-paper { background: var(--paper); padding: 36px 28px 48px; box-shadow: 0 8px 32px rgba(80,50,20,0.12); min-height: 520px; }
+    .letter-header { text-align: center; margin-bottom: 28px; }
+    .letter-header h1 { font-size: 20px; color: var(--accent); }
+    .letter-body { font-size: 16px; line-height: 1.95; color: var(--ink); min-height: 280px; outline: none; white-space: pre-wrap; word-break: break-word; }
+    .letter-footer { margin-top: 36px; text-align: right; font-size: 14px; color: #6a5a4a; }
+    .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(to top, rgba(245,240,230,0.97), rgba(245,240,230,0.85)); display: flex; gap: 12px; justify-content: center; z-index: 60; opacity: 0; transform: translateY(20px); transition: all 0.5s 0.6s; }
+    .bottom-bar.show { opacity: 1; transform: translateY(0); }
+    .btn { flex: 1; max-width: 160px; height: 46px; border: none; border-radius: 28px; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #faf6ef; }
+    .btn-ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    #bless-stage { background: linear-gradient(160deg, #f8f1e3, #d9c4a8); z-index: 20; }
+    .bless-content { text-align: center; padding: 0 32px; opacity: 0; transform: scale(0.92); transition: all 1s; }
+    .bless-content.show { opacity: 1; transform: scale(1); }
+    .bless-title { font-size: 32px; color: var(--accent); margin: 20px 0; }
+    .bless-text { font-size: 15px; line-height: 1.8; color: #6a5a4a; margin: 40px 0; }
+  </style>
+</head>
+<body>
+  <section id="cover" class="stage">
+    <div class="cover-content">
+      <div class="cover-title">给您的一封信</div>
+      <div class="cover-sub">教师节 · 专属祝福</div>
+      <div class="cover-btn" id="startBtn">打开信封</div>
+    </div>
+  </section>
+
+  <section id="envelope-stage" class="stage hidden">
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope" id="envelope">
+        <div class="env-body"></div>
+        <div class="env-flap"></div>
+        <div class="wax-seal" id="waxSeal"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letter-stage" class="stage hidden">
+    <div class="letter-container" id="letterContainer">
+      <div class="letter-paper">
+        <div class="letter-header"><h1>敬爱的老师</h1></div>
+        <div class="letter-body" id="letterBody" contenteditable="true"></div>
+        <div class="letter-footer"><div id="letterDate"></div></div>
+      </div>
+    </div>
+    <div class="bottom-bar" id="bottomBar">
+      <button class="btn btn-primary" id="finishBtn">完成 · 祝福</button>
+    </div>
+  </section>
+
+  <section id="bless-stage" class="stage hidden">
+    <div class="bless-content">
+      <div class="bless-title">教师节快乐</div>
+      <div class="bless-text">愿您桃李满天下 春晖遍四方</div>
+    </div>
+  </section>
+
+  <script>
+    const $ = sel => document.querySelector(sel);
+    const stages = { cover: $('#cover'), envelope: $('#envelope-stage'), letter: $('#letter-stage'), bless: $('#bless-stage') };
+    function showStage(name) {
+      Object.values(stages).forEach(s => s.classList.add('hidden'));
+      stages[name].classList.remove('hidden');
+    }
+    const defaultLetter = '老师您好：\n\n时光匆匆，转眼又是一年教师节。\n\n还记得课堂上您耐心讲解的样子。\n\n谢谢您教会了我知识，更教会了我如何认真对待生活。\n\n愿您身体安康，教师节快乐！';
+    function init() {
+      const now = new Date();
+      $('#letterDate').textContent = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+      $('#letterBody').innerText = defaultLetter;
+      $('#letterBody').addEventListener('input', function() {
+        localStorage.setItem('letter', this.innerText);
+      });
+      const saved = localStorage.getItem('letter');
+      if (saved) $('#letterBody').innerText = saved;
+      $('#startBtn').addEventListener('click', () => showStage('envelope'));
+      const openEnvelope = () => {
+        const seal = $('#waxSeal');
+        const env = $('#envelope');
+        if (seal.classList.contains('broken')) return;
+        seal.classList.add('broken');
+        seal.style.animation = 'sealCrack 0.55s ease forwards';
+        setTimeout(() => env.classList.add('open'), 280);
+        setTimeout(() => {
+          showStage('letter');
+          $('#letterContainer').classList.add('show');
+          $('#bottomBar').classList.add('show');
+        }, 1100);
+      };
+      $('#envelopeWrap').addEventListener('click', openEnvelope);
+      $('#waxSeal').addEventListener('click', e => { e.stopPropagation(); openEnvelope(); });
+      $('#finishBtn').addEventListener('click', () => {
+        showStage('bless');
+        $('#blessContent').classList.add('show');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', init);
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes sealCrack { 0% { transform: translateX(-50%) scale(1) rotate(0); } 100% { transform: translateX(-50%) scale(1.4) rotate(18deg); opacity: 0; } }
+  </script>
+</body>
+</html>
