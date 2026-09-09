@@ -33,8 +33,7 @@
 <body>
 
 <div id="p1" class="page active">
-  <h1>给您的一封信</h1>
-  <p>教师节 · 专属祝福</p>
+  <h1>给最好的郑老师</h1>
   <button onclick="show(2)">打开信封</button>
 </div>
 
@@ -56,7 +55,7 @@
 
 <div id="p4" class="page">
   <h1>教师节快乐</h1>
-  <p>愿您桃李满天下<br>春晖遍四方<br><br>感谢您用知识点亮前路<br>用温暖守护成长</p>
+  <p>愿您桃李满天下<br>家庭事业顶呱呱<br>
   <div class="seal2">師</div>
 </div>
 
