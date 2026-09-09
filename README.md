@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>给老师的一封信</title>
+  <style>
+    body { margin: 0; padding: 20px; font-family: Arial; background: #f5f0e6; text-align: center; }
+    h1 { color: #8b5a2b; }
+    input, textarea, button { padding: 10px; font-size: 16px; margin: 10px; width: 80%; }
+    textarea { min-height: 200px; }
+    button { background: #8b5a2b; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    button:hover { background: #6a4620; }
+  </style>
+</head>
+<body>
+  <h1>给老师的一封信</h1>
+  <p>教师节快乐！</p>
+
+  <textarea id="letter" placeholder="写下你对老师的祝福...">老师您好：
+
+老师，教师节快乐呀!!
+
+上学期见不到您我们真的很想念您，还好大四又能上您的课了，我会好好听讲的😊
+
+您无疑是我最喜欢的老师，当然我们许多人都会这么想的嘻嘻嘻
+
+您以后有什么任务可以尽情吩咐我，我很开心能帮助到您❤️
+
+愿您身体安康，平安幸福，教师节快乐！</textarea>
+
+  <br>
+  <button onclick="save()">保存</button>
+  <button onclick="share()">分享</button>
+
+  <script>
+    function save() {
+      localStorage.setItem('letter', document.getElementById('letter').value);
+      alert('已保存！');
+    }
+
+    function share() {
+      const text = document.getElementById('letter').value;
+      const url = window.location.href;
+      alert('分享链接：' + url + '\n\n信件内容已保存');
+    }
+
+    // 页面加载时恢复保存的内容
+    window.onload = function() {
+      const saved = localStorage.getItem('letter');
+      if (saved) {
+        document.getElementById('letter').value = saved;
+      }
+    }
+  </script>
+</body>
+</html>
