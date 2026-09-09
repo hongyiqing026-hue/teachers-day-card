@@ -1,23 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>给老师的一封信</title>
   <style>
-    body { margin: 0; padding: 20px; font-family: Arial; background: #f5f0e6; text-align: center; }
-    h1 { color: #8b5a2b; }
-    input, textarea, button { padding: 10px; font-size: 16px; margin: 10px; width: 80%; }
-    textarea { min-height: 200px; }
-    button { background: #8b5a2b; color: white; border: none; cursor: pointer; border-radius: 5px; }
-    button:hover { background: #6a4620; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial; background: #f5f0e6; height: 100vh; overflow: hidden; }
+    .page { width: 100%; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; }
+    .page.active { display: flex; }
+    #p1 { background: linear-gradient(135deg, #f8f1e3, #e8d9c4); }
+    #p1 h1 { font-size: 48px; color: #8b5a2b; margin-bottom: 20px; }
+    #p1 p { font-size: 18px; color: #7a6a5a; margin-bottom: 40px; }
+    #p1 button { padding: 15px 40px; background: #8b5a2b; color: white; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; }
+    #p2 { background: #e8dcc8; }
+    .box { width: 300px; height: 200px; background: #f0e6d4; border: 3px solid #d9cbb0; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; position: relative; }
+    .seal { width: 70px; height: 70px; background: #c0392b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffe6b4; font-size: 32px; font-weight: bold; cursor: pointer; box-shadow: 0 6px 16px rgba(100,20,20,0.35); }
+    .seal:active { transform: scale(0.95); }
+    .msg { position: absolute; bottom: -50px; font-size: 14px; color: #8a7a6a; }
+    #p3 { background: linear-gradient(180deg, #f5efe4, #ebe2d2); overflow-y: auto; padding: 20px; }
+    .letter { width: 100%; max-width: 420px; background: #faf6ef; padding: 40px 20px; border-radius: 4px; box-shadow: 0 8px 32px rgba(80,50,20,0.12); }
+    .letter h2 { text-align: center; color: #8b5a2b; margin-bottom: 20px; }
+    .letter textarea { width: 100%; height: 300px; padding: 15px; font-size: 15px; border: 1px solid #e8dfd0; border-radius: 3px; resize: none; font-family: Arial; }
+    .letter .date { text-align: right; font-size: 12px; color: #9a8a7a; margin: 10px 0; }
+    .letter button { width: 100%; padding: 12px; background: #8b5a2b; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 16px; margin-top: 15px; }
+    #p4 { background: linear-gradient(160deg, #f8f1e3, #d9c4a8); text-align: center; }
+    #p4 h1 { font-size: 44px; color: #8b5a2b; margin-bottom: 40px; }
+    #p4 p { font-size: 16px; line-height: 2; color: #6a5a4a; margin-bottom: 40px; }
+    .seal2 { width: 90px; height: 90px; background: #c0392b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffe6b4; font-size: 44px; font-weight: bold; margin: 0 auto; box-shadow: 0 6px 16px rgba(100,20,20,0.3); }
   </style>
 </head>
 <body>
-  <h1>给老师的一封信</h1>
-  <p>教师节快乐！</p>
 
-  <textarea id="letter" placeholder="写下你对老师的祝福...">老师您好：
+<div id="p1" class="page active">
+  <h1>给您的一封信</h1>
+  <p>教师节 · 专属祝福</p>
+  <button onclick="show(2)">打开信封</button>
+</div>
+
+<div id="p2" class="page">
+  <div class="box">
+    <div class="seal" onclick="show(3)">師</div>
+    <div class="msg">点击印章打开</div>
+  </div>
+</div>
+
+<div id="p3" class="page">
+  <div class="letter">
+    <h2>敬爱的老师</h2>
+    <textarea id="txt" placeholder="写下你的祝福..."></textarea>
+    <div class="date" id="d"></div>
+    <button onclick="show(4)">完成 · 祝福</button>
+  </div>
+</div>
+
+<div id="p4" class="page">
+  <h1>教师节快乐</h1>
+  <p>愿您桃李满天下<br>春晖遍四方<br><br>感谢您用知识点亮前路<br>用温暖守护成长</p>
+  <div class="seal2">師</div>
+</div>
+
+<script>
+const txt = `老师您好：
 
 老师，教师节快乐呀!!
 
@@ -27,31 +71,24 @@
 
 您以后有什么任务可以尽情吩咐我，我很开心能帮助到您❤️
 
-愿您身体安康，平安幸福，教师节快乐！</textarea>
+愿您身体安康，平安幸福，教师节快乐！`;
 
-  <br>
-  <button onclick="save()">保存</button>
-  <button onclick="share()">分享</button>
+function show(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('p' + n).classList.add('active');
+  
+  if (n === 3) {
+    const d = new Date();
+    document.getElementById('d').innerHTML = d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日';
+    const s = localStorage.getItem('l');
+    document.getElementById('txt').value = s || txt;
+  }
+}
 
-  <script>
-    function save() {
-      localStorage.setItem('letter', document.getElementById('letter').value);
-      alert('已保存！');
-    }
+document.getElementById('txt').addEventListener('input', e => {
+  localStorage.setItem('l', e.target.value);
+});
+</script>
 
-    function share() {
-      const text = document.getElementById('letter').value;
-      const url = window.location.href;
-      alert('分享链接：' + url + '\n\n信件内容已保存');
-    }
-
-    // 页面加载时恢复保存的内容
-    window.onload = function() {
-      const saved = localStorage.getItem('letter');
-      if (saved) {
-        document.getElementById('letter').value = saved;
-      }
-    }
-  </script>
 </body>
 </html>
